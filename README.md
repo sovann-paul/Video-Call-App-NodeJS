@@ -21,7 +21,7 @@ A conference call implementation using WebRTC, Socket.io and Node.js.
 
  
 # Demo
-You can test at https://chat.1410inc.xyz.
+You can test at https://sovan-webrtc.herokuapp.com/
 
 
 # Note
