@@ -54,32 +54,48 @@ window.addEventListener( 'load', () => {
         e.preventDefault();
 
         let roomName = document.querySelector( '#room-name' ).value;
-        let yourName = document.querySelector( '#your-name' ).value;
-
-        if ( roomName && yourName ) {
+       // let yourName = document.querySelector( '#your-name' ).value;
+       
+        if ( roomName  ) {
             //remove error message, if any
             document.querySelector( '#err-msg' ).innerHTML = "";
 
             //save the user's name in sessionStorage
-            sessionStorage.setItem( 'username', yourName );
+            //sessionStorage.setItem( 'username', yourName );
 
+            var randomstring = helpers.generateRandomString();
+            var roomid =roomName.trim().replace( ' ', '_' )+"_"+randomstring;
             //create room link
-            let roomLink = `${ location.origin }?room=${ roomName.trim().replace( ' ', '_' ) }_${ helpers.generateRandomString() }`;
+            let roomLink = `${ location.origin }?room=${roomid}`;
 
             //show message with link to room
             document.querySelector( '#room-created' ).innerHTML = `Room successfully created. Click <a href='${ roomLink }'>here</a> to enter room. 
                 Share the room link with your partners.`;
 
+            document.querySelector( '#share-roomId' ).innerHTML = `Share this room id with your friends: ${ roomid }`;
+                
             //empty the values
             document.querySelector( '#room-name' ).value = '';
-            document.querySelector( '#your-name' ).value = '';
+            //document.querySelector( '#your-name' ).value = '';
         }
 
         else {
             document.querySelector( '#err-msg' ).innerHTML = "All fields are required";
         }
     } );
+    document.getElementById( 'join-room' ).addEventListener( 'click', ( e ) => {
+        e.preventDefault();
+        let roomName1 = document.querySelector( '#room-name1' ).value;
+        if(roomName1){
+                //remove error message, if any
+            document.querySelector( '#err-msg1' ).innerHTML = "";
+            let roomLink = `${ location.origin }?room=${  roomName1 }`;
+            location.href =`${roomLink}`;
 
+        }else{
+            document.querySelector( '#err-msg' ).innerHTML = "All fields are required";
+        }
+    });
 
     //When the 'Enter room' button is clicked.
     document.getElementById( 'enter-room' ).addEventListener( 'click', ( e ) => {
